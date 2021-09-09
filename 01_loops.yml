@@ -1,0 +1,35 @@
+---
+# Working with simple loops
+- name: Simple loops
+  hosts: localhost
+  vars:
+    loop_array:
+      - First
+      - Second
+      - Third
+    loop_hashes:
+    - { name: 'Jere', age: 33 }
+    - { name: 'Simo', age: 22 }
+    - { name: 'Pekka', age: 11 }
+    loop_dict:
+      environment: dev
+      application: ansible
+  tasks:
+    - name: Looping array
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ loop_array }}"
+
+    - name: Looping hashes
+      debug:
+        msg: "{{ item.name }} is {{ item.age}} old"
+      loop: "{{ loop_hashes }}"
+
+    - name: Looping dict
+      debug:
+        msg: "{{ item.key }} and {{ item.value }}"
+      loop: "{{ loop_dict | dict2items }}"
+
+    - name: Reading for dict
+      debug:
+        msg: "The value is {{ loop_dict['environment'] }}"
