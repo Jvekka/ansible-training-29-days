@@ -1,0 +1,35 @@
+---
+# Recovering from errors with blocks
+# Not tested as my VM's were not running during the development ^_^
+
+- name: Recover from errors with blocks
+  hosts: localhost
+  tasks:
+    - name: Update database
+      block:
+        - name: Display update mssage
+          debug:
+            message: Update the database
+        
+        - name: Update postgreSQL server to latest version
+          yum:
+            name: postgresql-server
+            state: latest
+
+      rescue:
+        - name: Display error message
+          debug:
+            msg: "Update failed, restarting the database"
+        
+        - name: Restart the database
+          service:
+            name: posgresql
+            state: restarted
+      
+      always:
+        - name: Notify user about the reboot
+          debug:
+            msg: Rebooting the server
+        
+        - name: Reboot the server
+          reboot:
