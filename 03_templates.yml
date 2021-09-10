@@ -1,0 +1,14 @@
+---
+# Working with Jinja and templates
+
+- name: Working with Jinja and templates
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Deploy customized motd file
+      template:
+        src: motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: "0644"

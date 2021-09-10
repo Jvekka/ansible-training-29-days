@@ -1,0 +1,13 @@
+---
+# Lookup function
+- name: Lookup function
+  hosts: localhost
+  vars:
+    list:
+      - one
+      - two
+  tasks:
+    - name: Print out the content of the text files
+      debug:
+        msg: "{{ lookup('file', item + '.txt') }}"
+      loop: "{{ list }}"
