@@ -1,0 +1,7 @@
+---
+# Work with the roles from Galaxy
+
+- name: Working with the roles
+  hosts: all
+  roles:
+    - geerlingguy.apache
