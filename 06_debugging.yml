@@ -1,0 +1,31 @@
+---
+# Debugging basic commands
+
+# ansible-playbook --syntax-check playbook.yml
+# output will be playbook: playbook.yml
+
+# ansible-playbook --check playbook
+# output will be what woudl have changed
+# not all modules support this, example azure_load_balancer
+
+# check_mode: no 
+# it will always run that task
+# check_mode: yes
+# it will always check the task
+
+# Working with assert
+- name: Debugging
+  hosts: all
+  tasks:
+    - name: Assert
+      assert:
+        that:
+          - my_param is not defined
+        fail_msg: "Damn"
+        success_msg: "Yeah"
+
+    - name: Fail
+      fail:
+        msg: "This should fail"
+      when:
+        - my_param is not defined
