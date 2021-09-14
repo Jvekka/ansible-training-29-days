@@ -1,0 +1,11 @@
+---
+# Conditions with groups
+
+- name: Playing with groups
+  hosts: all
+  tasks:
+    - name: Print out when in group production
+      debug:
+        msg: "I am in production"
+      when:
+        - inventory_hostname in groups['production']
