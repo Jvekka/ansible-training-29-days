@@ -1,0 +1,13 @@
+# Ansible-lint custom configuration
+
+exclude_paths
+  - files/
+  - templates
+
+use_default_rules: true
+
+skip_list:
+  - skip_this_tag
+
+warn_list:
+  - experimental
