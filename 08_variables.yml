@@ -1,0 +1,28 @@
+---
+# How to use variables in Ansible
+# ansible-playbook <playbook.yml> --extra-vars "extra_name=Joe"
+
+- name: Play with variables
+  hosts: all
+  vars:
+    name: John
+  tasks:
+    - name: Print out the name
+      debug:
+        var: name
+
+- name: Play with variable file
+  hosts: all
+  vars_files:
+    - vars/users.yml
+  tasks:
+    - name: Print out the name
+      debug:
+        var: name
+
+- name: Play with extra variable
+  hosts: all
+  tasks:
+    - name: Print out the name
+      debug:
+        var: extra_name
